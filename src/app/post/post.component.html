@@ -1,0 +1,49 @@
+<div class="col-md-6 col-md-offset-3">
+<div  *ngIf="message != null" class="panel panel-danger"><h4>{{message}}</h4></div>
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+	<input type="text" [(ngModel)]="title" placeholder="title" name=title class="form-control"><br>
+	<input type="text" [(ngModel)]="description" placeholder="description" name="description" class="form-control"><br>
+	<input type="hidden" [(ngModel)]="userId" name="userId" class="form-control">
+	<input type="hidden" [(ngModel)]="response.originalName" name="fileName" class="form-control">
+	<!-- file upload input -->
+<!-- 	<image-upload
+	  [max]="100"
+	  [url]="'uploads/'"
+	  [buttonCaption]="'Select Images!'"
+	  [dropBoxMessage]="'Drop your images here!'"
+	  (onFileUploadFinish)="imageUploaded($event)"
+	  (onRemove)="imageRemoved($event)"
+	  ([ngModel])="file" 
+	></image-upload> -->
+	<input type="file" ngFileSelect [options]="basicOptions" (onUpload)="handleUpload($event)">
+	
+	<div>
+		Response: {{ response | json }}
+	</div>
+	<div>
+  		Progress: {{ progress }}%
+	</div>
+	<button class="btn btn-primary form-control" type="submit">Add Post</button>
+</form>
+
+	<h1 style="text-align: center;">Posts</h1>
+	<p style="text-align:center">{{userId}}</p>
+	<ul class="col-md-6 col-md-offset-3">
+		<li *ngFor="let post of posts | async " class="thumbnail"  id="list">
+				<p class="panel-body">{{post.userId}}</p>
+			<img src="{{post.fileName}}">
+			<div class="caption">
+				<h2 class="panel-heading">{{post.title}}</h2>
+				<p class="panel-body">{{post.description}}</p>
+			</div>
+			<button class="btn btn-danger" (click)="deleteItem(post.$key)">Delete</button>
+		</li>
+	</ul>
+
+</div>
+
+
+
+
+
+    

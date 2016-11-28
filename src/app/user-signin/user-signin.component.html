@@ -1,0 +1,14 @@
+<div class="col-md-6 col-md-offset-3">
+<div *ngIf="message != null" class="panel panel-danger"><h4 style="text-align: center; color:red">{{message}}</h4></div>
+<h2>User Sign In</h2>
+	<form class="form-group" (ngSubmit)="signIn(form)" #form="ngForm">
+		<label for="email">Email:</label>
+		<input type="email" name="email" ngModel class="form-control">
+		<label for="password">Password:</label>
+		<input type="password" name="password" ngModel class="form-control">
+		<br>
+		<button type="submit" class="btn btn-primary">Sign In</button>
+	</form>
+</div>
+
+
